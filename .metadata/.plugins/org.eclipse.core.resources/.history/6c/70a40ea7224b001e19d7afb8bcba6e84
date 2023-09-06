@@ -1,0 +1,13 @@
+package com.indianbank.service;
+
+import com.indianbank.entity.PasswordReset;
+
+public class PasswordResetServiceImpl implements PasswordResetService{
+
+	@Override
+	public PasswordReset saveUser(PasswordReset passwordReset) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

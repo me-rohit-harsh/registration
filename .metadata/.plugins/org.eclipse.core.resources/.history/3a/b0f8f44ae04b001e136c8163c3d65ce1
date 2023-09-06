@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+<!-- <link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="container mt-3">
+		<form th:action="@{/user}" th:object="${user}" method="POST">
+			<div class="row jumbotron box8">
+				<div class="col-sm-12 mx-t3 mb-4 ">
+					<h2 class="text-center">Register with Indian Banking</h2>
+					<div th:if="${param.success}">
+						<div class="alert alert-info fade show" id="userInfoDiv">
+							You have registered successfully
+							<h1>
+								User ID: <span th:text="${session.userId}"></span>
+							</h1>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 form-group">
+					<label for="name-f">First Name</label> <input type="text"
+						class="form-control" name="fname" id="name-f"
+						placeholder="Enter your first name." required>
+				</div>
+				<div class="col-sm-6 form-group">
+					<label for="name-l">Last name</label> <input type="text"
+						class="form-control" name="lname" id="name-l"
+						placeholder="Enter your last name." required>
+				</div>
+				<div class="col-sm-6 form-group">
+					<label for="email">Email</label> <input type="email"
+						class="form-control" name="email" id="email"
+						placeholder="Enter your email." required>
+				</div>
+
+				<div class="col-sm-6 form-group">
+					<label for="address-2">Full Address </label> <input type="address"
+						class="form-control" name="address" id="address-2"
+						placeholder="Village/City Name/State." required>
+				</div>
+
+				<div class="col-sm-6 form-group">
+					<label for="Date">Date Of Birth</label> <input type="Date"
+						name="dOB" class="form-control" id="Date" placeholder="" required>
+				</div>
+				<div class="col-sm-6 form-group">
+					<label for="sex">Gender</label> <select id="sex" name="sex"
+						class="form-control browser-default custom-select" required>
+						<option value="" disabled selected>Select Gender</option>
+						<option value="M">Male</option>
+						<option value="F">Female</option>
+					</select>
+				</div>
+
+				<div class="col-sm-6 form-group">
+					<label for="account">Account Type</label> <select id="ac-type"
+						name="acType" class="form-control browser-default custom-select"
+						required>
+						<option value="" disabled selected>Select Account Type</option>
+						<option value="Saving">Saving</option>
+						<option value="Current">Current</option>
+					</select>
+				</div>
+
+				<div class="col-sm-6 form-group">
+					<label for="pass">Password</label> <input type="Password"
+						name="password" class="form-control" id="pass"
+						placeholder="Enter your password." required>
+				</div>
+
+				<div class="col-sm-12">
+					<input type="checkbox" class="form-check d-inline" id="chb"
+						required><label for="chb" class="form-check-label">&nbsp;
+						I accept all <!-- Button trigger modal --> <a type="button"
+						href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+							terms and conditions. </a> <!-- Modal -->
+						<div class="modal fade" id="staticBackdrop"
+							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title " id="staticBackdropLabel">Terms
+											and Conditions</h4>
+										<p>Welcome to Indian Baking! By using our services, you
+											agree to abide by the following terms and conditions:</p>
+									</div>
+									<div class="modal-body">
+										<h5>1. Acceptance of Terms</h5>
+										<p>By using our services, you agree to be bound by these
+											terms and conditions. If you do not agree to these terms,
+											please do not use our services.</p>
+										<h5>2. Use of Services</h5>
+										<p>You must use our services in accordance with all
+											applicable laws and regulations. You are responsible for
+											maintaining the confidentiality of your account and password.</p>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">Close</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</label>
+				</div>
+
+				<div class="col-sm-12 form-group mb-0">
+					<p class="small fw-bold mt-2 pt-1 mb-0">
+						Already have an account? <a th:href="@{login}" class="link-danger">Log
+							In</a>
+						<button class="btn btn-primary float-right">Submit</button>
+					</p>
+
+				</div>
+
+			</div>
+		</form>
+
+	</div>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+</body>
+</html>

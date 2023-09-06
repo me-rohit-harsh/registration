@@ -1,0 +1,75 @@
+package com.indianbank.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.indianbank.entity.PasswordReset;
+import com.indianbank.entity.User;
+import com.indianbank.service.PasswordResetService;
+import com.indianbank.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class LoginController {
+
+	@Autowired
+	private PasswordResetService passwordResetService;
+	@Autowired
+	private UserService userService;
+
+	public LoginController(UserService userService) {
+		super();
+		this.userService = userService;
+	}
+
+	public LoginController() {
+		super();
+	}
+
+	public LoginController(PasswordResetService passwordResetService) {
+		super();
+		this.passwordResetService = passwordResetService;
+	}
+
+	@GetMapping("/login")
+	public String loginForm() {
+		System.out.println("@GetMapping(\"login\")");
+		return "login";
+	}
+
+	@PostMapping("/reset")
+	public String viewPassword(@ModelAttribute("PasswordReset") PasswordReset passwordReset, HttpSession session) {
+
+	    System.out.println("@PostMapping(\"/reset\")");
+	    session.setAttribute("id", passwordReset.getUserId());
+
+	    // Save the user's password reset information
+	    passwordResetService.saveUser(passwordReset);
+
+	    Optional<User> userOptional = userService.getUser(passwordReset.getUserId());
+
+	    if (userOptional.isPresent()) {
+	        User user = userOptional.get();
+
+	        // Check if the email matches
+	        if (user.getEmail().equals(passwordReset.getEmail())) {
+	            session.setAttribute("userPassword", user.getPassword());
+	            // Redirect to the login page with a success message
+	            return "redirect:/login?success";
+	        } else {
+	            return "redirect:/login?error";
+	        }
+	    } else {
+	        // Handle the case where no user data exists for the given userId
+	        return "redirect:/login?error";
+	    }
+	}
+
+
+}

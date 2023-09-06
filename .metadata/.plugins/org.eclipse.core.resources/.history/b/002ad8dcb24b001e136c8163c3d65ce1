@@ -1,0 +1,72 @@
+package com.indianbank.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.indianbank.entity.PasswordReset;
+import com.indianbank.entity.User;
+import com.indianbank.service.PasswordResetService;
+import com.indianbank.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class LoginController {
+
+	@Autowired
+	private PasswordResetService passwordResetService;
+	@Autowired
+	private UserService userService;
+
+	public LoginController(UserService userService) {
+		super();
+		this.userService = userService;
+	}
+
+	public LoginController() {
+		super();
+	}
+
+	public LoginController(PasswordResetService passwordResetService) {
+		super();
+		this.passwordResetService = passwordResetService;
+	}
+
+	@GetMapping("/login")
+	public String loginForm() {
+		System.out.println("@GetMapping(\"login\")");
+		return "login";
+	}
+
+	@PostMapping("/reset")
+	public String viewPassword(@ModelAttribute("PasswordReset") PasswordReset passwordReset, HttpSession session,
+			User user) {
+
+		System.out.println("@PostMapping(\"/reset\")");
+		// Store relevant attributes in the session
+		session.setAttribute("email", passwordReset.getEmail());
+		session.setAttribute("id", passwordReset.getUserId());
+
+		// Save the user's password reset information
+		passwordResetService.saveUser(passwordReset);
+		System.out.println(userService.getUser(passwordReset.getUserId()));
+//		User mainUser = userService.getUser(passwordReset.getUserId());
+//		System.out.println(mainUser);
+//		if (mainUser != null) {
+//			if (mainUser.getEmail().equals(passwordReset.getEmail())) {
+//				session.setAttribute("userPassword", mainUser.getPassword());
+//			} else {
+//				return "redirect:/login?error";
+//			}
+//		} else {
+//			return "redirect:/login?error";
+//		}
+
+		// Redirect to the login page with a success message
+		return "redirect:/login?success";
+	}
+
+}

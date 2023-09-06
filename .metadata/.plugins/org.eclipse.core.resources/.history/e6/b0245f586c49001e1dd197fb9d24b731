@@ -1,0 +1,11 @@
+package com.indianbank.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="bank_user")
+public class User {
+
+	
+}

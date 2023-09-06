@@ -1,0 +1,9 @@
+package com.indianbank.entity;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class PasswordReset {
+	
+
+}

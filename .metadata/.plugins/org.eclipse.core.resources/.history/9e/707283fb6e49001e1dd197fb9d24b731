@@ -1,0 +1,15 @@
+package com.indianbank;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class IndianBankApplication implements CommandLineRunner{
+
+	public static void main(String[] args) {
+		SpringApplication.run(IndianBankApplication.class, args);
+		System.out.println("Indian Banking is up and running........");
+	}
+
+}

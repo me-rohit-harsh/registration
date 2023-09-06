@@ -1,0 +1,57 @@
+package com.indianbank.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.indianbank.entity.PasswordReset;
+import com.indianbank.service.PasswordResetService;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class LoginController {
+
+	@Autowired
+	private PasswordResetService passwordResetService;
+
+	public LoginController(PasswordResetService passwordResetService) {
+		super();
+		this.passwordResetService = passwordResetService;
+	}
+
+	@GetMapping("/login")
+	public String loginForm(Model model) {
+		System.out.println("@GetMapping(\"login\")");
+//		PasswordReset newUser = new PasswordReset();
+//		model.addAttribute("forgetUser", newUser);
+		return "login";
+	}
+
+	@PostMapping("/reset")
+	public String viewPassword(@ModelAttribute("PasswordReset") PasswordReset passwordReset, HttpSession session) {
+		// You can remove the println statement; it's for debugging purposes.
+		System.out.println("@PostMapping(\"/reset\")");
+
+		// Assuming that you want to create a new PasswordReset object for the saved
+		// user.
+		// If you want to update the existing user's password, retrieve the user from
+		// the database.
+		PasswordReset newUser = passwordReset;
+
+		// Save the user's password reset information
+		passwordResetService.saveUser(newUser);
+		System.out.println("newUser.getId()");
+
+		// Store relevant attributes in the session
+		session.setAttribute("email", newUser.getEmail());
+		session.setAttribute("id", newUser.getId());
+
+		// Redirect to the login page with a success message
+		return "redirect:/login?success";
+	}
+
+}
