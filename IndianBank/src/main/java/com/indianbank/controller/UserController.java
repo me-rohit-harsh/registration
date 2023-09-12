@@ -47,11 +47,11 @@ public class UserController {
 
 //In This using HttpSession to pass the attribute not Model because of its scope
 
-	@GetMapping("/index")
-	public String dashboard(Model model) {
-		System.out.println("@GetMapping(\"/index\")");
-		model.addAttribute("users", userService.allUser());
-		return "index";
-	}
+//	@GetMapping("/index")
+//	public String dashboard(Model model) {
+//		System.out.println("@GetMapping(\"/index\")");
+//		model.addAttribute("users", userService.allUser());
+//		return "index";
+//	}
 
 }

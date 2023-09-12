@@ -8,4 +8,6 @@ import com.indianbank.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	User findByIdAndPassword(Long id, String password);
+
 }

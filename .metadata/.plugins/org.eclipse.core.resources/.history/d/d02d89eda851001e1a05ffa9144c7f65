@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Error!!</title>
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400|Oswald:600">
+<link rel="stylesheet" type="text/css" th:href="@{/css/error/error.css}">
+</head>
+<body>
+
+	<div id="error">Error</div>
+	<div class="error-num">
+		500
+		<div class="error-num__clip">404</div>
+	</div>
+	<p id="desc">Uh oh, there seems to be a problem.</p>
+	<p>
+		Let me help you find <a th:href="@{login}" target="_blank">a way
+			out</a>
+	</p>
+</body>
+</html>

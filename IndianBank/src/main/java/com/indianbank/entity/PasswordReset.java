@@ -15,26 +15,22 @@ public class PasswordReset {
 	private Long id;
 	private Long userId;
 	private String email;
-	@Transient // Marking the email field as transient
-	private String userPassword;
 
 	public PasswordReset() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public PasswordReset(Long id, Long userId, String email, String userPassword) {
+	public PasswordReset(Long id, Long userId, String email) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.email = email;
-		this.userPassword = userPassword;
 	}
 
 	@Override
 	public String toString() {
-		return "PasswordReset [id=" + id + ", userId=" + userId + ", email=" + email + ", userPassword=" + userPassword
-				+ "]";
+		return "PasswordReset [id=" + id + ", userId=" + userId + ", email=" + email + "]";
 	}
 
 	public Long getId() {
@@ -59,14 +55,6 @@ public class PasswordReset {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
 	}
 
 }

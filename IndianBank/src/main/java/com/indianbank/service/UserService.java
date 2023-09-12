@@ -17,6 +17,7 @@ public interface UserService {
 
 	boolean deleteUser(Long id);
 	
+	void timestamp(Long id);
 	
 
 }

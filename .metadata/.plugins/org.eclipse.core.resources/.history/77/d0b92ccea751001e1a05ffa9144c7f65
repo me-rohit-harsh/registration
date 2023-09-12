@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Error!!</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/error/error.css}">
+</head>
+<body>
+	<div class="vc-container">
+		<div class="vc-content">
+			<h1 class="vc-heading">500</h1>
+			<p class="vc-sub-heading">
+				Internal Server <span class="blink-infinite">Error</span>
+			</p>
+			<p>
+				Uh oh, there seems to be a problem. Let me help you find a<a
+					th:href="@{login}">a way out</a>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

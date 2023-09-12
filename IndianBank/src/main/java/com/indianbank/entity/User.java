@@ -14,7 +14,7 @@ import jakarta.persistence.TemporalType;
 @Table(name = "userdata")
 public class User {
 	@Id
-	@Column(name = "user_id")
+	@Column(name = "userId")
 	@GeneratedValue
 	private Long id; // User ID
 
