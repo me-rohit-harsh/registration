@@ -35,7 +35,7 @@
 					<li class="nav-item"><a class="nav-link" href="#"
 						data-bs-toggle="modal" data-bs-target="#deposit">Deposit Money</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"
-						data-bs-toggle="modal" data-bs-target="#withdrawal">Withdraw
+						data-bs-toggle="modal" data-bs-target="#password">Withdraw
 							Money</a></li>
 				</ul>
 				<!-- Add ml-auto class to align links to the right -->
@@ -101,20 +101,47 @@
 			</div>
 		</div>
 
+
+
+
 		<!-- popup for cash withdrawal -->
-		<div class="modal fade" id="withdrawal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">Cash
-							Withdrawal</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
+		<form method="post" th:action="@{withdrawl}" th:object="${user}">
+			<div class="modal fade" id="password" aria-hidden="true"
+				aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalToggleLabel">Authentication</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<label for="password" class="col-form-label">Password:</label> <input
+									type="text" class="form-control" id="password"
+									required="required" placeholder="Enter your password"
+									name="password">
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary"
+								data-bs-target="#withdraw" data-bs-toggle="modal">Next</button>
+						</div>
 					</div>
-					<div class="modal-body">
-						<form method="post" th:action="@{withdrawl}" th:object="${user}">
-							
+				</div>
+			</div>
+			<div class="modal fade" id="withdraw" aria-hidden="true"
+				aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Withdraw
+								Money</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
 							<div class="mb-3">
 								<label for="withdrawal-method" class="col-form-label">Withdrawal
 									Method:</label> <select
@@ -135,17 +162,19 @@
 							<div id="fast-cash-buttons">
 								<!-- Fast Cash buttons will be dynamically added here -->
 							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">Close</button>
-						<button type="submit" id="withdraw-button" class="btn btn-primary">Withdraw
-							Money</button>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+							<button type="submit" id="withdraw-button"
+								class="btn btn-primary">Withdraw Money</button>
+						</div>
+
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</nav>
 
 
