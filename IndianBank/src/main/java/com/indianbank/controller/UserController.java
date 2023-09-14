@@ -53,5 +53,8 @@ public class UserController {
 //		model.addAttribute("users", userService.allUser());
 //		return "index";
 //	}
-
+	@GetMapping("/")
+	public String landing() {
+		return "landing";
+	}
 }

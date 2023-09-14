@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Company</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom CSS for styling */
+        body {
+            background-image: url('/bank.png'); /* Replace with your background image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-4 text-white"> <strong>Welcome to Our Banking Company</strong> </h1>
+        <p class="lead text-white">Your Trusted Financial Partner</p>
+        <div class="mt-4">
+            <a href="#" class="btn btn-primary btn-lg mx-2">Login</a>
+            <a href="#" class="btn btn-outline-primary btn-lg mx-2">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Popper.js and Bootstrap JS) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

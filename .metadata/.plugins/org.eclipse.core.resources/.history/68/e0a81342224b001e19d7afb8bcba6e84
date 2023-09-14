@@ -1,7 +1,0 @@
-package com.indianbank.service;
-
-public interface PasswordReset  {
-	
-	PasswordReset saveUser2(PasswordReset passwordReset);
-
-}

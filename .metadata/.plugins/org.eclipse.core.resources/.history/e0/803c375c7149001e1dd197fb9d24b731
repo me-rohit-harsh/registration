@@ -1,7 +1,0 @@
-package com.indianbank.service;
-
-import com.indianbank.entity.User;
-
-public interface UserService {
-	User saveUser(User user);
-}

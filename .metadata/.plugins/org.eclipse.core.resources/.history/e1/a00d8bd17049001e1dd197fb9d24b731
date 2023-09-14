@@ -1,6 +1,0 @@
-package com.indianbank.service;
-
-
-public interface UserService {
-
-}

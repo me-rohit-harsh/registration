@@ -91,12 +91,13 @@ public class LoginController {
 		if (userid != null) {
 			User user = userRepository.findById(userid).orElse(null);
 			if (user != null) {
+				session.setAttribute("user", user);
 				model.addAttribute("user", user);
 				userService.timestamp(userid);
 				return "index";
 			}
 		}
-		return "error"; // Assuming "index" is the name of your template or view
+		return "error";
 	}
 
 }
