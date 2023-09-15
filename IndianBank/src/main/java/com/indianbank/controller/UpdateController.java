@@ -26,7 +26,7 @@ public class UpdateController {
 		model.addAttribute("user", user);
 		return "update";
 	}
-
+	
 	@PostMapping("/deleteuser")
 	public String deleteuser(HttpSession session) {
 		System.out.println("@PostMapping(\"/deleteuser\")");

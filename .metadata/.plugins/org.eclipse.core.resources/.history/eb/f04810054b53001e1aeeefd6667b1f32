@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transfer</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="@{/css/style.css}"
+	th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Online Banking System</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				
+				<!-- Add ml-auto class to align links to the right -->
+				<ul class="navbar-nav ml-auto">
+					<!-- Dropdown menu -->
+					<li class="nav-item dropdown order-2">
+						<!-- Use the "order-2" class to move it to the right --> <a
+						class="nav-link dropdown-toggle" href="#" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false"> <img
+							alt="Profile" style="width: 35px;"
+							src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1">
+					</a>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<!-- Use "dropdown-menu-end" class -->
+							<li><a class="dropdown-item" th:href="@{update}">Update
+									Profile</a></li>
+							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" th:href="@{/logout}">Log
+									Off</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<h2>Welcome to the send money page</h2>
+			<p>You can send money to the person by UPI ID. The name of the
+				UPI ID is returned on successful verification of the UPI ID.</p>
+
+			<form action="">
+				<div class="form-outline mb-3">
+					<label for="form3Example3">User Id:</label> <input type="text"
+						id="form3Example3" class="form-control"
+						placeholder="Enter your user id" name="userid" required
+						pattern="[0-9]+" title="Please enter only numeric values">
+				</div>
+				<div class="mb-3 form-outline">
+					<label for="withdrawal-method">Withdrawal Method:</label> <select
+						class="form-control browser-default custom-select"
+						id="withdrawal-method" required>
+						<option value="" disabled selected>Select Withdrawal
+							Method</option>
+						<option value="Cash">Cash</option>
+						<option value="Online">Fast Cash</option>
+					</select>
+				</div>
+				<div class="mb-3 form-outline">
+					<label for="withdrawal-amount">Withdrawal Amount:</label> <input
+						type="text" class="form-control" id="withdrawal-amount"
+						placeholder="Enter amount" name="balance" required
+						pattern="[0-9]+" title="Please enter only numeric values">
+				</div>
+				<div id="fast-cash-buttons">
+					<!-- Fast Cash buttons will be dynamically added here -->
+				</div>
+<hr>
+				<div class="mb-3 form-outline">
+				<button type="button" class="btn btn-secondary">
+					<a th:href="@{index}">Cancel</a>
+				</button>
+				<button type="submit" id="withdraw-button" class="btn btn-primary">Transfer</button>
+				
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="@{/js/app.js}" th:src="@{/js/app.js}"></script>
+</body>
+</html>

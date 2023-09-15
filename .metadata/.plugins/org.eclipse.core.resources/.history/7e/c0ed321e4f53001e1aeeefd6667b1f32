@@ -1,0 +1,41 @@
+.modal-header {
+	display: inline;
+}
+
+.jumbotron {
+	background-color: #c0dfff
+}
+
+.divider:after, .divider:before {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: #eee;
+}
+
+.h-custom {
+	height: calc(100% - 73px);
+}
+
+.modal-footer {
+	justify-content: space-between
+}
+
+@media ( max-width : 450px) {
+	.h-custom {
+		height: 100%;
+	}
+}
+
+.datepicker {
+	padding: 10px
+}
+a, a:hover{
+	text-decoration: none;
+}
+#fast-cash-buttons button {
+	margin-right: 15px
+}
+ .form-outline label {
+            font-weight: bold;
+        }

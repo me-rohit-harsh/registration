@@ -23,17 +23,17 @@
 
 	<div class="container">
 
-		<!-- Breadcrumb -->
+
 		<nav aria-label="breadcrumb" class="main-breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a th:href="@{index}">Home</a></li>
-				<!-- <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li> -->
 				<li class="breadcrumb-item active" aria-current="page">Profile
 					Settings (<span th:text="${user.fname}"></span>)
 				</li>
 			</ol>
 		</nav>
-		<!-- /Breadcrumb -->
+
+
 
 		<div class="row gutters-sm">
 			<div class="col-md-4 d-none d-md-block">
@@ -226,11 +226,12 @@
 								<div class="form-group">
 									<label class="d-block">Change Password</label> <input
 										name="oldPassword" type="text" class="form-control"
-										placeholder="Enter your old password"> <input
-										type="text" class="form-control mt-1"
-										placeholder="New password" name="newPassword"> <input
-										type="text" class="form-control mt-1"
-										placeholder="Confirm new password" name="newPassword1">
+										placeholder="Enter your old password" required="required">
+									<input type="text" class="form-control mt-1"
+										placeholder="New password" name="newPassword"
+										required="required"> <input type="text"
+										class="form-control mt-1" placeholder="Confirm new password"
+										name="newPassword1" required="required">
 								</div>
 								<hr>
 
@@ -267,13 +268,14 @@
 				</div>
 			</div>
 		</div>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-		<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 </body>
 
 </html>

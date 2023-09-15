@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 		fastCashButtons.forEach(amount => {
 			const button = $('<button type="submit" class="btn btn-primary"></button>');
-			button.text(`$${amount}`);
+			button.text(`${amount}`);
 			button.click(function() {
 				// When a Fast Cash button is clicked, set the input field value
 				$("#withdrawal-amount").val(amount);

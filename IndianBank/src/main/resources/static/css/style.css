@@ -30,3 +30,15 @@
 .datepicker {
 	padding: 10px
 }
+
+a, a:hover {
+	text-decoration: none;
+}
+
+#fast-cash-buttons button {
+	margin-right: 15px
+}
+
+label {
+	font-weight: bold;
+}
