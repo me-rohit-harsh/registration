@@ -86,7 +86,7 @@ public class LoginController {
 	@GetMapping("/index")
 	public String dashboard(HttpSession session, Model model) {
 		System.out.println("@GetMapping(\"/index\")");
-		// Retrieve the userid from the session
+		// Retrieve the user id from the session
 		Long userid = (Long) session.getAttribute("userid");
 		if (userid != null) {
 			User user = userRepository.findById(userid).orElse(null);

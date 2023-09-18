@@ -26,7 +26,7 @@ public class UpdateController {
 		model.addAttribute("user", user);
 		return "update";
 	}
-	
+
 	@PostMapping("/deleteuser")
 	public String deleteuser(HttpSession session) {
 		System.out.println("@PostMapping(\"/deleteuser\")");
@@ -54,10 +54,10 @@ public class UpdateController {
 			userService.saveUser(user);
 			session.setAttribute("message1", "Your password has been changed");
 			session.setAttribute("msg1", true);
-			return "redirect:/index?success";
+			return "redirect:/index?changed";
 		}
 		session.setAttribute("msg", false);
-		session.setAttribute("errormsg", "Oops Something went wrong!");
+		session.setAttribute("errormsg", "Oops!! Something went wrong!");
 		return "redirect:/index?error";
 	}
 
@@ -79,7 +79,7 @@ public class UpdateController {
 			return "redirect:/index?success";
 		}
 		session.setAttribute("msg", false);
-		session.setAttribute("errormsg", "Oops Something went wrong!");
+		session.setAttribute("errormsg", "Oops!! Something went wrong!");
 		return "redirect:/index?error";
 	}
 
@@ -132,5 +132,5 @@ public class UpdateController {
 	 * the name of the user. and then will check that balance entered is less or
 	 * equal than the total fund, and then authentication and then finally sent
 	 */
-	
+
 }
