@@ -39,6 +39,7 @@ public class IndianBankApplication implements CommandLineRunner {
 //		reset.setUserPassword("rohit");
 //		reset.setEmail("Rohit@Gmail.com");
 //		passwordResetRepository.save(reset);
+
 	}
 
 }

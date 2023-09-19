@@ -103,7 +103,7 @@ public class UpdateController {
 	public String withdrawl(@ModelAttribute("user") User user, HttpSession session) {
 		User getUser = (User) session.getAttribute("user");
 		if (getUser.getPassword().equals(user.getPassword())) {
-			if (getUser.getBalance() > user.getBalance()) {
+			if (getUser.getBalance() >= user.getBalance()) {
 				getUser.setBalance(getUser.getBalance() - user.getBalance());
 				session.setAttribute("newBalance", getUser.getBalance());
 				userService.saveUser(getUser);
