@@ -44,10 +44,13 @@ public class User {
 
 	@Column(name = "Date_of_opening")
 	@Temporal(TemporalType.DATE)
-	final private Date dOJ=new Date(); // User date of opening the account
+	final private Date dOJ = new Date(); // User date of opening the account
 
 	@Column(name = "Last_session")
 	private String lDA; // User last session timestamp
+
+	@Column(name = "ip_address")
+	private String ipAdderess;
 
 	public User() {
 		super();
@@ -55,7 +58,7 @@ public class User {
 	}
 
 	public User(Long id, String fname, String lname, char sex, String email, String acType, String password,
-			double balance, String dOB, String address) {
+			double balance, String dOB, String address, String ipAdderess) {
 		super();
 		this.id = id;
 		this.fname = fname;
@@ -67,13 +70,22 @@ public class User {
 		this.balance = balance;
 		this.dOB = dOB;
 		this.address = address;
+		this.ipAdderess = ipAdderess;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", fname=" + fname + ", lname=" + lname + ", sex=" + sex + ", email=" + email
 				+ ", acType=" + acType + ", password=" + password + ", balance=" + balance + ", dOB=" + dOB
-				+ ", address=" + address + ", dOJ=" + dOJ + ", lDA=" + lDA + "]";
+				+ ", address=" + address + ", dOJ=" + dOJ + ", lDA=" + lDA + ", Ip=" + ipAdderess + "]";
+	}
+
+	public String getIpAdderess() {
+		return ipAdderess;
+	}
+
+	public void setIpAdderess(String ipAdderess) {
+		this.ipAdderess = ipAdderess;
 	}
 
 	public Long getId() {

@@ -24,15 +24,20 @@ public class TransferController {
 	@GetMapping("/transfer")
 	public String transacion(HttpSession session) {
 		System.out.println("@GetMapping(\"/transfer\")");
-		User user = (User) session.getAttribute("user");
+//		User user = (User) session.getAttribute("user");
 
 //		here what i am doing is that first checking that user is logged in or not
 //		then checking that it passes the authentication part
 //		It will prevent us from direct illegal access of the end points
-		if ((Boolean) session.getAttribute("transferMsg")) {
-
-			return "transfer";
+		Boolean auth = (Boolean) session.getAttribute("true");
+		if (auth != null) {
+			if ((Boolean) session.getAttribute("transferMsg") != null) {
+				return "transfer";
+			} else {
+				return "redirect:/index";
+			}
 		}
+
 		return "redirect:/login";
 
 	}
@@ -93,6 +98,45 @@ public class TransferController {
 			session.setAttribute("errorMsg", "Transaction declinded Due to Insufficient Funds!!");
 			return "redirect:index?transactionError";
 		}
+	}
+
+	@PostMapping("/deposit")
+	public String deposit(@ModelAttribute("user") User user, HttpSession session) {
+		if (user.getBalance() != 0) {
+			User getUser = (User) session.getAttribute("user");
+			getUser.setBalance(getUser.getBalance() + user.getBalance());
+			session.setAttribute("newBalance", getUser.getBalance());
+			userService.saveUser(getUser);
+			session.setAttribute("deposit", true);
+			session.setAttribute("depoMessage", "Money has been credited!!  ");
+			return "redirect:index?deposited";
+		}
+		session.setAttribute("msg", false);
+		session.setAttribute("errormsg", "Oops!! Something went wrong!");
+		return "redirect:index?error";
+	}
+
+	@PostMapping("/withdrawl")
+	public String withdrawl(@ModelAttribute("user") User user, HttpSession session) {
+		User getUser = (User) session.getAttribute("user");
+		if (getUser.getPassword().equals(user.getPassword())) {
+			if (getUser.getBalance() >= user.getBalance()) {
+				getUser.setBalance(getUser.getBalance() - user.getBalance());
+				session.setAttribute("newBalance", getUser.getBalance());
+				userService.saveUser(getUser);
+				session.setAttribute("withdraw", true);
+				session.setAttribute("withdrawMessage", "Money has been debited!!  ");
+				return "redirect:/index?withdrawn";
+			}
+			session.setAttribute("msg", false);
+			session.setAttribute("errormsg", "Opps! Insufficient funds");
+			return "redirect:index?error";
+		} else {
+			session.setAttribute("msg", false);
+			session.setAttribute("errormsg", "Opps! Incorrect Password");
+			return "redirect:index?error";
+		}
+
 	}
 //	@PostMapping("/findUserbyId")
 //	public String findUserbyId(@RequestParam("userId") Long userId, HttpSession session) {

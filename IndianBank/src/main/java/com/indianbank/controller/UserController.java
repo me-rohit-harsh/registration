@@ -35,38 +35,41 @@ public class UserController {
 			@RequestParam(name = "genderFilter", defaultValue = " ") Character genderFilter, Model model,
 			HttpSession session) {
 		System.out.println("@GetMapping(\"/users\")");
-		User user = (User) session.getAttribute("user");
-		session.setAttribute("user", user);
-		System.out.println(genderFilter);
-		if (searchKey.isEmpty() && genderFilter.equals(' ')) {
-			model.addAttribute("users", userService.allUser());
-			return "users";
-		} else {
-			session.setAttribute("trueMsg", true);
-			List<User> users;
-			if (genderFilter.equals(' ')) {
-				// If no gender filter is selected, use only the search key.
-
-				users = userRepository.findByFnameContainingIgnoreCaseOrLnameContainingIgnoreCase(searchKey, searchKey);
+		Boolean auth = (Boolean) session.getAttribute("true");
+		System.out.println(auth);
+		if (auth != null&& auth) {
+			if (searchKey.isEmpty() && genderFilter.equals(' ')) {
+				model.addAttribute("users", userService.allUser());
+				return "users";
 			} else {
-				// If a gender filter is selected, use both search key and gender criteria.
+				session.setAttribute("trueMsg", true);
+				List<User> users;
+				if (genderFilter.equals(' ')) {
+					// If no gender filter is selected, use only the search key.
 
-				users = userRepository.findByFnameContainingIgnoreCaseOrLnameContainingIgnoreCaseAndSex(searchKey,
-						searchKey, genderFilter);
+					users = userRepository.findByFnameContainingIgnoreCaseOrLnameContainingIgnoreCase(searchKey,
+							searchKey);
+				} else {
+					// If a gender filter is selected, use both search key and gender criteria.
+
+					users = userRepository.findByFnameContainingIgnoreCaseOrLnameContainingIgnoreCaseAndSex(searchKey,
+							searchKey, genderFilter);
+				}
+				model.addAttribute("users", users);
+				return "users";
 			}
-			model.addAttribute("users", users);
-			return "users";
-
+		} else {
+			return "redirect:/login";
 		}
 	}
 
 	@GetMapping("/searchUser")
-
 	public String searchUser() {
+		System.out.println("@GetMapping(\"/searchUser\")");
 		return "redirect:/users";
 	}
 
-	@GetMapping("register")
+	@GetMapping("/register")
 	public String createUserForm(Model model) {
 		System.out.println("@GetMapping(\"register\")");
 		User user = new User();

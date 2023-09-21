@@ -6,11 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestTemplate;
 
 import com.indianbank.entity.ChangePass;
 import com.indianbank.entity.User;
 import com.indianbank.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -22,9 +24,13 @@ public class UpdateController {
 	@GetMapping("/update")
 	public String updateProfile(HttpSession session, Model model) {
 		System.out.println("@GetMapping(\"/update\")");
-		User user = (User) session.getAttribute("user");
-		model.addAttribute("user", user);
-		return "update";
+		Boolean auth = (Boolean) session.getAttribute("true");
+		if(auth!=null && auth) {
+			User user = (User) session.getAttribute("user");
+			model.addAttribute("user", user);
+			return "update";
+		}
+		return "redirect:/login";
 	}
 
 	@PostMapping("/deleteuser")
@@ -50,6 +56,7 @@ public class UpdateController {
 				&& changePass.getNewPassword().equals(changePass.getNewPassword1())) {
 			System.out.println("Updated succefully");
 			user.setPassword(changePass.getNewPassword());
+
 //			I need to implement a new method to update the new password of the corresponding user done 
 			userService.saveUser(user);
 			session.setAttribute("message1", "Your password has been changed");
@@ -83,44 +90,6 @@ public class UpdateController {
 		return "redirect:/index?error";
 	}
 
-	@PostMapping("/deposit")
-	public String deposit(@ModelAttribute("user") User user, HttpSession session) {
-		if (user.getBalance() != 0) {
-			User getUser = (User) session.getAttribute("user");
-			getUser.setBalance(getUser.getBalance() + user.getBalance());
-			session.setAttribute("newBalance", getUser.getBalance());
-			userService.saveUser(getUser);
-			session.setAttribute("deposit", true);
-			session.setAttribute("depoMessage", "Money has been credited!!  ");
-			return "redirect:index?deposited";
-		}
-		session.setAttribute("msg", false);
-		session.setAttribute("errormsg", "Oops!! Something went wrong!");
-		return "redirect:index?error";
-	}
-
-	@PostMapping("/withdrawl")
-	public String withdrawl(@ModelAttribute("user") User user, HttpSession session) {
-		User getUser = (User) session.getAttribute("user");
-		if (getUser.getPassword().equals(user.getPassword())) {
-			if (getUser.getBalance() >= user.getBalance()) {
-				getUser.setBalance(getUser.getBalance() - user.getBalance());
-				session.setAttribute("newBalance", getUser.getBalance());
-				userService.saveUser(getUser);
-				session.setAttribute("withdraw", true);
-				session.setAttribute("withdrawMessage", "Money has been debited!!  ");
-				return "redirect:/index?withdrawn";
-			}
-			session.setAttribute("msg", false);
-			session.setAttribute("errormsg", "Opps! Insufficient funds");
-			return "redirect:index?error";
-		} else {
-			session.setAttribute("msg", false);
-			session.setAttribute("errormsg", "Opps! Incorrect Password");
-			return "redirect:index?error";
-		}
-
-	}
 //	I am able to get the authenticated user and send them back to the view
 //	and now what i have to do is to create update page
 //	and write back end code to save the newly data in DB

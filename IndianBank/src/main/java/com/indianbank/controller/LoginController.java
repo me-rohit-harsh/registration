@@ -1,8 +1,5 @@
 package com.indianbank.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,9 +56,10 @@ public class LoginController {
 		if (loggedInUser != null) {
 			System.out.println(loggedInUser);
 			session.setAttribute("userid", loggedInUser.getId());
+			session.setAttribute("true", true);
 			return "redirect:/index";
 		}
-		session.setAttribute("true", true);
+		session.setAttribute("true", false);
 		return "redirect:/login?error";
 	}
 
@@ -79,10 +77,11 @@ public class LoginController {
 			session.setAttribute("id", passwordReset.getUserId());
 			return "redirect:/login?success";
 		}
-		session.setAttribute("true", true);
+		session.setAttribute("true", false);
 		return "redirect:/login?error";
 	}
-
+	
+	
 	@GetMapping("/index")
 	public String dashboard(HttpSession session, Model model) {
 		System.out.println("@GetMapping(\"/index\")");
@@ -96,6 +95,9 @@ public class LoginController {
 				userService.timestamp(userid);
 				return "index";
 			}
+		}
+		else {
+			return "redirect:/login";
 		}
 		return "error";
 	}
