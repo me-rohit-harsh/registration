@@ -40,7 +40,6 @@ INDEX VERSION 1.132+C:\Users\ROHIT\Desktop\registration-login\.metadata\.plugins
 102026271.index
 2406856089.index
 2096779679.index
-421459375.index
 3091597453.index
 4051663757.index
 1020447887.index
