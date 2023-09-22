@@ -65,6 +65,7 @@
 				<groupId>
 					org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<mainClass>com.indianbank.IndianBankApplication</mainClass>
 			</plugin>
 		</plugins>
 	</build>
