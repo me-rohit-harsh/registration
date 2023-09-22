@@ -21,4 +21,4 @@ logging.level.org.hibernate.sql=DEBUG
 spring.main.allow-bean-definition-overriding=true
 
 
-spring.profiles.active=${ENV:prod}
+spring.profiles.active=prod
