@@ -33,7 +33,7 @@
 				org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>
@@ -62,12 +62,11 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>
-					org.springframework.boot</groupId>
+				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-                <mainClass>com.indianbank.IndianBankApplication</mainClass>
-            </configuration>
+					<mainClass>com.indianbank.IndianBankApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
