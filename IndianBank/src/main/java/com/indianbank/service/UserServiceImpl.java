@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
 		super();
 		this.userRepository = userRepository;
 	}
+	
 
 	@Override
 	public User saveUser(User user) {
@@ -65,12 +66,6 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user);
 	}
 
-//	public boolean loginUser(Long id, String password) {
-//		User user = userRepository.findByUserIdAndPassword(id, password);
-//		if (user != null) {
-//			return true;
-//		}
-//		return false;
-//	}
+
 
 }

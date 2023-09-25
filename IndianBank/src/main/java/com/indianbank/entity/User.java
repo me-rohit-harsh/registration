@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -16,13 +17,13 @@ public class User {
 	@Id
 	@Column(name = "userId")
 	@GeneratedValue
-	private Long id; // User ID
+	private Long id;
 
 	@Column(name = "First_name")
-	private String fname; // User first name
+	private String fname;
 
 	@Column(name = "Last_name")
-	private String lname; // User last name
+	private String lname;
 
 	private char sex;
 	private String email;
@@ -31,34 +32,44 @@ public class User {
 	private String acType;
 
 //	@Column(name="Password")
-	private String password; // User password
+	private String password;
 
 //	@Column(name="Balance")
-	private double balance; // User balance
+	private double balance;
 
 	@Column(name = "Date_of_birth")
-	private String dOB; // User date of birth
+	private String dOB;
 
 	@Column(name = "Full_Address")
-	private String address; // User full address
+	private String address;
 
 	@Column(name = "Date_of_opening")
 	@Temporal(TemporalType.DATE)
-	final private Date dOJ = new Date(); // User date of opening the account
+	final private Date dOJ = new Date();
 
 	@Column(name = "Last_session")
-	private String lDA; // User last session timestamp
+	private String lDA;
 
 	@Column(name = "ip_address")
 	private String ipAdderess;
+	@OneToOne
+	private DelAdd delAdd;
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", fname=" + fname + ", lname=" + lname + ", sex=" + sex + ", email=" + email
+				+ ", acType=" + acType + ", password=" + password + ", balance=" + balance + ", dOB=" + dOB
+				+ ", address=" + address + ", dOJ=" + dOJ + ", lDA=" + lDA + ", ipAdderess=" + ipAdderess + ", delAdd="
+				+ delAdd + "]";
+	}
+
 	public User(Long id, String fname, String lname, char sex, String email, String acType, String password,
-			double balance, String dOB, String address, String ipAdderess) {
+			double balance, String dOB, String address, String lDA, String ipAdderess, DelAdd delAdd) {
 		super();
 		this.id = id;
 		this.fname = fname;
@@ -70,14 +81,9 @@ public class User {
 		this.balance = balance;
 		this.dOB = dOB;
 		this.address = address;
+		this.lDA = lDA;
 		this.ipAdderess = ipAdderess;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", fname=" + fname + ", lname=" + lname + ", sex=" + sex + ", email=" + email
-				+ ", acType=" + acType + ", password=" + password + ", balance=" + balance + ", dOB=" + dOB
-				+ ", address=" + address + ", dOJ=" + dOJ + ", lDA=" + lDA + ", Ip=" + ipAdderess + "]";
+		this.delAdd = delAdd;
 	}
 
 	public String getIpAdderess() {
@@ -170,6 +176,14 @@ public class User {
 
 	public Date getdOJ() {
 		return dOJ;
+	}
+
+	public DelAdd getDelAdd() {
+		return delAdd;
+	}
+
+	public void setDelAdd(DelAdd delAdd) {
+		this.delAdd = delAdd;
 	}
 
 	public String getlDA() {

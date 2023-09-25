@@ -91,6 +91,7 @@ public class LoginController {
 			User user = userRepository.findById(userid).orElse(null);
 			if (user != null) {
 				session.setAttribute("user", user);
+				session.setAttribute("deladd", user.getDelAdd());
 				model.addAttribute("user", user);
 				userService.timestamp(userid);
 				return "index";

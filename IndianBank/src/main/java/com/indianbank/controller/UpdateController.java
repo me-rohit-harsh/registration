@@ -6,13 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.indianbank.entity.ChangePass;
+import com.indianbank.entity.DelAdd;
 import com.indianbank.entity.User;
+import com.indianbank.service.DelService;
 import com.indianbank.service.UserService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -20,14 +22,18 @@ public class UpdateController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private DelService delService;
 
 	@GetMapping("/update")
 	public String updateProfile(HttpSession session, Model model) {
 		System.out.println("@GetMapping(\"/update\")");
 		Boolean auth = (Boolean) session.getAttribute("true");
-		if(auth!=null && auth) {
+		if (auth != null && auth) {
 			User user = (User) session.getAttribute("user");
 			model.addAttribute("user", user);
+			model.addAttribute("deladd", user.getDelAdd());
+			session.setAttribute("deliveryAdd", user.getDelAdd());
 			return "update";
 		}
 		return "redirect:/login";
@@ -44,6 +50,14 @@ public class UpdateController {
 		}
 		session.setAttribute("true", false);
 		return "redirect:/?error";
+	}
+
+	@PostMapping("/upload-profile-picture")
+	public String uploadProfilePicture(@RequestParam("profilePicture") MultipartFile file) {
+		// Handle file upload logic here
+		// Save the uploaded file to a directory or database
+		// Associate the uploaded file with the user's profile
+		return "redirect:/index?changed"; // Redirect to the user's profile page
 	}
 
 	@PostMapping("/changePassword")
@@ -84,6 +98,27 @@ public class UpdateController {
 			session.setAttribute("message", "Your personal information has been updated");
 			session.setAttribute("msg", true);
 			return "redirect:/index?success";
+		}
+		session.setAttribute("msg", false);
+		session.setAttribute("errormsg", "Oops!! Something went wrong!");
+		return "redirect:/index?error";
+	}
+
+	@PostMapping("/deladd")
+	public String deladd(@ModelAttribute("deladd") DelAdd delAdd, HttpSession session) {
+		System.out.println("@PostMapping(\"/deladd\")");
+		User user = (User) session.getAttribute("user");
+		System.out.println(delAdd);
+		if (delAdd != null) {
+			delAdd.setPincode(delAdd.getPincode());
+			delAdd.setState(delAdd.getState());
+			delAdd.setStreet(delAdd.getStreet());
+			delService.saveDelAdd(delAdd);
+			user.setDelAdd(delAdd);
+			userService.saveUser(user);
+			session.setAttribute("msg", true);
+			session.setAttribute("sentMsg", "Address Saved!!");
+			return "redirect:/index?added";
 		}
 		session.setAttribute("msg", false);
 		session.setAttribute("errormsg", "Oops!! Something went wrong!");

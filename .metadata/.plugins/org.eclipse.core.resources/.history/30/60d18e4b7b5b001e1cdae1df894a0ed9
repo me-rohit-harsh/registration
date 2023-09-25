@@ -1,0 +1,5 @@
+package com.indianbank.entity;
+
+public class Transaction {
+
+}

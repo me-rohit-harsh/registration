@@ -2,6 +2,7 @@ package com.indianbank.service;
 
 import java.util.List;
 
+import com.indianbank.entity.DelAdd;
 import com.indianbank.entity.User;
 
 public interface UserService {
@@ -16,8 +17,8 @@ public interface UserService {
 	User updateUser(User user);
 
 	boolean deleteUser(Long id);
-	
+
 	void timestamp(Long id);
-	
+
 
 }

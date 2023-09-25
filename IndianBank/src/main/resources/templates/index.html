@@ -13,6 +13,10 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
 	integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
 	crossorigin="anonymous"></script>
+<!-- font awesome  -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 <link rel="stylesheet" type="text/css" th:href="@{/css/index/style.css}">
 </head>
 <body>
@@ -32,6 +36,12 @@
 					<li class="nav-item"><a class="nav-link" href="#"
 						data-bs-toggle="modal" data-bs-target="#password">Withdraw
 							Money</a></li>
+					<!-- Add this button within your navigation list -->
+					<li class="nav-item">
+						<button id="view-balance-button" class="btn btn-link nav-link">
+							<i id="balance-eye" class="fa fa-eye"></i> <span id="control">View Balance</span>
+						</button>
+					</li>
 					<li class="nav-item"><a class="btn btn-primary nav-link"
 						data-bs-toggle="modal" data-bs-target="#authenicate" href="#"
 						role="button">Send Money</a></li>
@@ -42,8 +52,13 @@
 					<li class="nav-item dropdown order-2">
 						<!-- Use the "order-2" class to move it to the right --> <a
 						class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"> <img
-							alt="Profile" style="width: 35px;"
+						data-bs-toggle="dropdown" aria-expanded="false">
+						<!-- <img
+							src="/src/main/java/profilePicture.jpg" alt="Profile Picture"
+							style="width: 35px;"> -->
+						
+						 <img style="width: 35px;"
+							alt="Profile" 
 							src="https://i0.wp.com/avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar-0.png?ssl=1">
 					</a>
 						<ul class="dropdown-menu dropdown-menu-end">
@@ -277,6 +292,13 @@
 				<span th:text="${session.updatedBal}"></span>
 			</div>
 		</div>
+		<div th:if="${param.added}">
+			<div th:if="${session.msg==true}"
+				class="alert alert-info fade show text-center" id="userInfoDiv">
+				<span style="color: green" th:text="${session.sentMsg}"> </span> <br>
+				<span th:text="${session.updatedBal}"></span>
+			</div>
+		</div>
 		<div class="row">
 			<h1>
 				Welcome to Indian Banking <span th:text="${user.fname}"></span>
@@ -290,6 +312,7 @@
 						<th th:if="${user.email != null}">Email</th>
 						<th th:if="${user.sex != null}">Sex</th>
 						<th th:if="${user.acType!= null}">Type</th>
+						<th th:if="${user.balance!= null}">Balance</th>
 						<th th:if="${user.dOJ != null}">Date of Joining</th>
 						<th th:if="${user.lDA != null}">Last Logged in</th>
 					</tr>
@@ -302,14 +325,57 @@
 						<td th:if="${user.email != null}" th:text="${user.email}"></td>
 						<td th:if="${user.sex != null}" th:text="${user.sex}"></td>
 						<td th:if="${user.acType != null}" th:text="${user.acType}"></td>
+						<td th:if="${user.balance != null}"><strong><span
+								id="account-balance">******</span></strong></td>
 						<td th:if="${user.dOJ != null}" th:text="${user.dOJ}"></td>
 						<td th:if="${user.lDA != null}" th:text="${user.lDA}"></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<span style="display: none" id="ac-balance" th:text="${user.balance}"></span>
+
+
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+
+					// Initialize variables
+					var balanceVisible = false;
+					var balance = parseFloat(document
+							.getElementById("ac-balance").textContent.trim());
+
+					// Initially hide the balance
+					$('#balance-eye').addClass('fa-eye-slash');
+					$('#control').text('View Balance');
+
+					// Function to toggle the balance visibility
+					function toggleBalanceVisibility() {
+						if (balanceVisible) {
+							$('#balance-eye').removeClass('fa-eye').addClass(
+									'fa-eye-slash');
+							$('#account-balance').text('******'); // Clear the balance
+							$('#control').text('View Balance');
+						} else {
+							$('#balance-eye').removeClass('fa-eye-slash')
+									.addClass('fa-eye');
+							$('#account-balance').text(balance.toFixed(2)); // Display the balance
+							$('#control').text('Hide Balance');
+						}
+						balanceVisible = !balanceVisible;
+					}
+
+					// Click event handler for the view balance button
+					$('#view-balance-button').click(function() {
+						toggleBalanceVisibility();
+
+					});
+				});
+	</script>
+
+
 </body>
 </html>
