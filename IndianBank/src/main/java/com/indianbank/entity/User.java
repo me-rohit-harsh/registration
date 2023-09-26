@@ -12,7 +12,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "userdata")
+@Table(name = "bankusers")
 public class User {
 	@Id
 	@Column(name = "userId")
@@ -52,8 +52,11 @@ public class User {
 
 	@Column(name = "ip_address")
 	private String ipAdderess;
+
 	@OneToOne
 	private DelAdd delAdd;
+
+	
 
 	public User() {
 		super();
@@ -65,7 +68,7 @@ public class User {
 		return "User [id=" + id + ", fname=" + fname + ", lname=" + lname + ", sex=" + sex + ", email=" + email
 				+ ", acType=" + acType + ", password=" + password + ", balance=" + balance + ", dOB=" + dOB
 				+ ", address=" + address + ", dOJ=" + dOJ + ", lDA=" + lDA + ", ipAdderess=" + ipAdderess + ", delAdd="
-				+ delAdd + "]";
+				+ delAdd + ", transaction=" +  "]";
 	}
 
 	public User(Long id, String fname, String lname, char sex, String email, String acType, String password,

@@ -1,0 +1,21 @@
+package com.indianbank.service;
+
+import org.springframework.stereotype.Service;
+
+import com.indianbank.entity.Transaction;
+import com.indianbank.repository.TransactionRepository;
+
+@Service
+public class TransactionService {
+	private TransactionRepository transactionRepository;
+
+	public TransactionService(TransactionRepository transactionRepository) {
+		super();
+		this.transactionRepository = transactionRepository;
+	}
+
+	public Transaction saveTransaction(Transaction transaction) {
+		return transactionRepository.save(transaction);
+	}
+
+}

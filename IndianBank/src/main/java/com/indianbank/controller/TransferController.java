@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.indianbank.entity.User;
 import com.indianbank.repository.UserRepository;
+/*import com.indianbank.service.TransactionService;*/
 import com.indianbank.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,8 @@ public class TransferController {
 	private UserService userService;
 	@Autowired
 	private UserRepository userRepository;
+//	@Autowired
+	/* private TransactionService transactionService; */
 
 	@GetMapping("/transfer")
 	public String transacion(HttpSession session) {
@@ -104,6 +107,11 @@ public class TransferController {
 	public String deposit(@ModelAttribute("user") User user, HttpSession session) {
 		if (user.getBalance() != 0) {
 			User getUser = (User) session.getAttribute("user");
+//			Transaction tx = new Transaction(user.getId(), user.getBalance(), "Credit", getUser.getBalance(),
+//					getUser.getBalance() + user.getBalance());
+//
+//			Transaction saveTransaction = transactionService.saveTransaction(tx);
+//			System.out.println(saveTransaction);
 			getUser.setBalance(getUser.getBalance() + user.getBalance());
 			session.setAttribute("newBalance", getUser.getBalance());
 			userService.saveUser(getUser);
@@ -121,6 +129,11 @@ public class TransferController {
 		User getUser = (User) session.getAttribute("user");
 		if (getUser.getPassword().equals(user.getPassword())) {
 			if (getUser.getBalance() >= user.getBalance()) {
+
+//				Transaction tx = new Transaction(user.getId(), user.getBalance(), "Debit", getUser.getBalance(),
+//						getUser.getBalance() - user.getBalance());
+//				Transaction saveTransaction = transactionService.saveTransaction(tx);
+//				System.out.println(saveTransaction);
 				getUser.setBalance(getUser.getBalance() - user.getBalance());
 				session.setAttribute("newBalance", getUser.getBalance());
 				userService.saveUser(getUser);
