@@ -55,8 +55,9 @@ public class User {
 
 	@OneToOne
 	private DelAdd delAdd;
-
 	
+	@OneToOne
+	private Transactions transaction;
 
 	public User() {
 		super();
@@ -68,11 +69,14 @@ public class User {
 		return "User [id=" + id + ", fname=" + fname + ", lname=" + lname + ", sex=" + sex + ", email=" + email
 				+ ", acType=" + acType + ", password=" + password + ", balance=" + balance + ", dOB=" + dOB
 				+ ", address=" + address + ", dOJ=" + dOJ + ", lDA=" + lDA + ", ipAdderess=" + ipAdderess + ", delAdd="
-				+ delAdd + ", transaction=" +  "]";
+				+ delAdd + ", transaction=" + transaction + "]";
 	}
 
+	
+
 	public User(Long id, String fname, String lname, char sex, String email, String acType, String password,
-			double balance, String dOB, String address, String lDA, String ipAdderess, DelAdd delAdd) {
+			double balance, String dOB, String address, String lDA, String ipAdderess, DelAdd delAdd,
+			Transactions transaction) {
 		super();
 		this.id = id;
 		this.fname = fname;
@@ -87,6 +91,15 @@ public class User {
 		this.lDA = lDA;
 		this.ipAdderess = ipAdderess;
 		this.delAdd = delAdd;
+		this.transaction = transaction;
+	}
+
+	public Transactions getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(Transactions transaction) {
+		this.transaction = transaction;
 	}
 
 	public String getIpAdderess() {

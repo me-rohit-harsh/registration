@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.indianbank.entity.Transactions;
 import com.indianbank.entity.User;
 import com.indianbank.repository.UserRepository;
-/*import com.indianbank.service.TransactionService;*/
+import com.indianbank.service.TransactionService;
 import com.indianbank.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,8 +22,8 @@ public class TransferController {
 	private UserService userService;
 	@Autowired
 	private UserRepository userRepository;
-//	@Autowired
-	/* private TransactionService transactionService; */
+	@Autowired
+	private TransactionService transactionService;
 
 	@GetMapping("/transfer")
 	public String transacion(HttpSession session) {
@@ -79,17 +80,29 @@ public class TransferController {
 		}
 	}
 
+	/*
+	 * trnsactionAmmount transactionType initialBalance finalBalance transactionId
+	 * userId
+	 */
 	@PostMapping("sender")
 	public String sender(@RequestParam("balance") double balance, HttpSession session) {
 		System.out.println("@PostMapping(\"sender\")");
 		User user = (User) session.getAttribute("user");
 		if (user.getBalance() > balance) {
+			User benificiaryUser = (User) session.getAttribute("benificiaryUser");
+			Transactions transactions = new Transactions(balance, "Debit", user.getBalance(),
+					user.getBalance() - balance, benificiaryUser.getId(), user.getId());
+			transactionService.saveTransaction(transactions);
 			user.setBalance(user.getBalance() - balance);
 			userService.saveUser(user);
-			User benificiaryUser = (User) session.getAttribute("benificiaryUser");
-			System.out.println(benificiaryUser);
+//error in sending money from the same ac
+			Transactions transactions2 = new Transactions(balance, "Credit", benificiaryUser.getBalance(),
+					benificiaryUser.getBalance() + balance, user.getId(), benificiaryUser.getId());
+
 			benificiaryUser.setBalance(benificiaryUser.getBalance() + balance);
-			System.out.println(benificiaryUser.getBalance());
+
+			transactionService.saveTransaction(transactions2);
+
 			userService.saveUser(user);
 			session.setAttribute("updatedBal", "Updated balance is " + user.getBalance());
 			userService.saveUser(benificiaryUser);
@@ -107,13 +120,15 @@ public class TransferController {
 	public String deposit(@ModelAttribute("user") User user, HttpSession session) {
 		if (user.getBalance() != 0) {
 			User getUser = (User) session.getAttribute("user");
-//			Transaction tx = new Transaction(user.getId(), user.getBalance(), "Credit", getUser.getBalance(),
-//					getUser.getBalance() + user.getBalance());
-//
-//			Transaction saveTransaction = transactionService.saveTransaction(tx);
-//			System.out.println(saveTransaction);
+			Transactions tx = new Transactions(user.getBalance(), "Credit", getUser.getBalance(),
+					getUser.getBalance() + user.getBalance(), user.getId(), getUser.getId());
+
+			Transactions saveTransaction = transactionService.saveTransaction(tx);
+			System.out.println(saveTransaction);
 			getUser.setBalance(getUser.getBalance() + user.getBalance());
 			session.setAttribute("newBalance", getUser.getBalance());
+//			the foreign key will point to the latest transaction details row
+			getUser.setTransaction(saveTransaction);
 			userService.saveUser(getUser);
 			session.setAttribute("deposit", true);
 			session.setAttribute("depoMessage", "Money has been credited!!  ");
@@ -130,12 +145,15 @@ public class TransferController {
 		if (getUser.getPassword().equals(user.getPassword())) {
 			if (getUser.getBalance() >= user.getBalance()) {
 
-//				Transaction tx = new Transaction(user.getId(), user.getBalance(), "Debit", getUser.getBalance(),
-//						getUser.getBalance() - user.getBalance());
-//				Transaction saveTransaction = transactionService.saveTransaction(tx);
-//				System.out.println(saveTransaction);
+				Transactions tx = new Transactions(user.getBalance(), "Debit", getUser.getBalance(),
+						getUser.getBalance() - user.getBalance(), user.getId(), getUser.getId());
+
+				Transactions saveTransaction = transactionService.saveTransaction(tx);
+				System.out.println(saveTransaction);
 				getUser.setBalance(getUser.getBalance() - user.getBalance());
 				session.setAttribute("newBalance", getUser.getBalance());
+//				the foreign key will point to the latest transaction details row
+				getUser.setTransaction(saveTransaction);
 				userService.saveUser(getUser);
 				session.setAttribute("withdraw", true);
 				session.setAttribute("withdrawMessage", "Money has been debited!!  ");
