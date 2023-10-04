@@ -1,5 +1,0 @@
-package com.indianbank.configuration;
-
-public class SecurityConfig {
-
-}

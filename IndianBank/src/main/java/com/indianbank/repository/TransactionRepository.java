@@ -10,6 +10,8 @@ import com.indianbank.entity.Transactions;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transactions, Long> {
 
-	
-	
+	List<Transactions> findByUserId(Long id);
+
+	List<Transactions> findByTransactionTypeAndUserId(String transactionType, Long userId);
+
 }

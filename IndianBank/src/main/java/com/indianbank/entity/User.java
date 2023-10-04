@@ -10,6 +10,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "bankusers")
@@ -57,6 +58,7 @@ public class User {
 	private DelAdd delAdd;
 	
 	@OneToOne
+//	@Transient
 	private Transactions transaction;
 
 	public User() {

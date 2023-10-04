@@ -88,7 +88,7 @@ public class TransferController {
 	public String sender(@RequestParam("balance") double balance, HttpSession session) {
 		System.out.println("@PostMapping(\"sender\")");
 		User user = (User) session.getAttribute("user");
-		if (user.getBalance() > balance) {
+		if (user.getBalance() >= balance) {
 			User benificiaryUser = (User) session.getAttribute("benificiaryUser");
 			Transactions transactions = new Transactions(balance, "Debit", user.getBalance(),
 					user.getBalance() - balance, benificiaryUser.getId(), user.getId());

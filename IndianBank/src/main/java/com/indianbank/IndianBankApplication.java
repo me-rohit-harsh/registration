@@ -1,13 +1,17 @@
 package com.indianbank;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.indianbank.entity.DelAdd;
+import com.indianbank.entity.Transactions;
 import com.indianbank.repository.DelAddRepository;
 import com.indianbank.repository.PasswordResetRepository;
+import com.indianbank.repository.TransactionRepository;
 import com.indianbank.repository.UserRepository;
 import com.indianbank.service.UserService;
 
@@ -29,9 +33,9 @@ public class IndianBankApplication implements CommandLineRunner {
 	@Autowired
 	private DelAddRepository delAddRepository;
 
+
 	@Override
 	public void run(String... args) throws Exception {
-		
 //		DelAdd deladd = new DelAdd();
 //		deladd.setId(1L);
 //		deladd.setPincode(201301L);

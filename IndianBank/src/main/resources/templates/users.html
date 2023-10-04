@@ -5,7 +5,7 @@
 <title>Indian Banking Users List</title>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
@@ -17,11 +17,11 @@
 
 	<br>
 	<div class="container">
-	<nav aria-label="breadcrumb" class="main-breadcrumb">
+		<nav aria-label="breadcrumb" class="main-breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a th:href="@{index}">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Active Users
-				</li>
+				<li class="breadcrumb-item active" aria-current="page">Active
+					Users</li>
 			</ol>
 		</nav>
 		<div class="row">
@@ -52,7 +52,7 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 offset-md-3" th:if="${session.trueMsg==true}" >
+			<div class="col-md-6 offset-md-3" th:if="${session.trueMsg==true}">
 				<div class="alert alert-info" th:if="${users.size() > 0}">
 					Found <span th:text="${users.size()}"></span> result(s)
 				</div>
@@ -81,8 +81,9 @@
 						<td th:text="${user.lname}"></td>
 						<td th:text="${user.email}"></td>
 						<td th:text="${user.sex}"></td>
-						<td th:text="${user.dOJ}"></td>
+
 						<td th:text="${user.acType}"></td>
+						<td th:text="${user.dOJ}"></td>
 					</tr>
 				</tbody>
 			</table>
