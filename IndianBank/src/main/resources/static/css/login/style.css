@@ -1,0 +1,41 @@
+.parallelogram {
+  -webkit-transform: skew(-40deg);
+  -moz-transform: skew(-40deg);
+  -o-transform: skew(-40deg);
+  transform: skew(-40deg);
+  position: absolute;
+  z-index: -9;
+}
+
+#one {
+  width: 20px;
+  height: 300px;
+  animation: moveBar 15s linear infinite;
+  -webkit-box-shadow: 100px 509px #612271, 20px 300px #612271, -120px 150px #612271;
+  -moz-box-shadow: 100px 509px #612271, 20px 300px #612271, -120px 150px #612271;
+  box-shadow: 100px 509px #612271, 20px 300px #612271, -120px 150px #612271;
+}
+
+#two {
+  width: 10px;
+  height: 300px;
+  animation: moveBar 30s linear infinite;
+  -webkit-box-shadow: 250px 450px #43174F, -50px 200px #43174F;
+  -moz-box-shadow: 250px 450px #43174F, -50px 200px #43174F;
+  box-shadow: 250px 450px #43174F, -50px 200px #43174F;
+}
+
+#three {
+  width: 10px;
+  height: 500px;
+  animation: moveBar 20s linear infinite;
+  -webkit-box-shadow: 70px 500px #7B5C83, -100px 200px #7B5C83;
+  -moz-box-shadow: 70px 500px #7B5C83, -100px 200px #7B5C83;
+  box-shadow: 70px 500px #7B5C83, -100px 200px #7B5C83;
+}
+
+@keyframes moveBar {
+  100% {
+    transform: skew(-40deg) translateY(-1000px);
+  }
+}

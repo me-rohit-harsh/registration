@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <!-- Add custom CSS for Neumorphic design -->
+    <style>
+        body {
+            background-color: #F0F2F5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #E0E5EC;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.2), -8px -8px 16px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .toggle-btn {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        .toggle-btn button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <div class="login-container">
+        <h5>Login</h5>
+        <form th:action="@{/login}" th:object="${credential}" method="POST">
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example3">User Id:</label>
+                <input id="form3Example3" class="form-control form-control-lg"
+                       name="userid" required="required"/>
+            </div>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="form3Example4">Password:</label>
+                <input type="password" id="form3Example4" class="form-control form-control-lg"
+                       name="userPassword" required="required"/>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Forgot
+                    Password</a>
+            </div>
+            <div class="text-lg-start mt-4 pt-2">
+                <button type="submit" class="btn btn-primary btn-lg"
+                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Login
+                </button>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a th:href="@{register}"
+                                                                                    class="link-danger">Register</a>
+                </p>
+            </div>
+        </form>
+    </div>
+    <div class="toggle-btn">
+        <button onclick="toggleMode()">Toggle Mode</button>
+    </div>
+</section>
+<script>
+    function toggleMode() {
+        const body = document.querySelector('body');
+        body.classList.toggle('dark-mode');
+    }
+</script>
+</body>
+</html>

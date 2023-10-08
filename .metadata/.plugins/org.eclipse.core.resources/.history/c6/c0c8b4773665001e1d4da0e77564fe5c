@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ebecf0;
+}
+
+body,
+p,
+input,
+select,
+textarea,
+button {
+  font-family: "Mulish", sans-serif;
+  letter-spacing: -0.2px;
+  font-size: 16px;
+}
+
+div,
+p {
+  color: #babecc;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+form {
+  padding: 16px;
+  width: 320px;
+  margin: 0 auto;
+}
+
+.segment {
+  padding: 32px 0;
+  text-align: center;
+}
+
+button,
+input {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: #ebecf0;
+  text-shadow: 1px 1px 0 #fff;
+}
+
+label {
+  display: block;
+  width: 100%;
+}
+
+input {
+  margin-right: 8px;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+}
+input:focus {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+
+button {
+  color: #61677c;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 700;
+}
+button:hover {
+  box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+}
+button:active {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+button .icon {
+  margin-right: 8px;
+}
+button.unit {
+  border-radius: 8px;
+  line-height: 0;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px;
+  font-size: 19.2px;
+}
+button.unit .icon {
+  margin-right: 0;
+}
+button.red {
+  display: block;
+  width: 100%;
+  color: #ae1100;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.input-group label {
+  margin: 0;
+  flex: 1;
+}
+
+
+.parallelogram
+	-webkit-transform: skew(-40deg)
+	-moz-transform: skew(-40deg)
+	-o-transform: skew(-40deg)
+	transform: skew(-40deg)
+	position: absolute
+	z-index: -9
+
+// Colors
+$color1: #612271
+$color2: #43174F
+$color3: #7B5C83
+	
+// Mixin
+=parallelogram($width, $height, $duration)
+	width: $width
+	height: $height
+	animation: moveBar $duration linear infinite
+
+=mixin($args...)
+	-webkit-box-shadow: $args
+	-moz-box-shadow: $args
+	box-shadow: $args
+
+#one
+	+parallelogram(20px, 300px, 15s)
+	+mixin(100px 509px $color1, 20px 300px $color1, -120px 150px $color1)
+
+#two
+	+parallelogram(10px, 300px, 30s)
+	+mixin(250px 450px $color2, -50px 200px $color2)
+
+#three
+	+parallelogram(10px, 500px, 20s)
+	+mixin(70px 500px $color3, -100px 200px $color3)
+
+@keyframes moveBar
+	100%
+		transform: skew(-40deg) translateY(-1000px)
+
+//////////////////////////////////////
+// Optional mixin for the animation //
+//////////////////////////////////////
+// =box-shadow($color, $offsetX, $offsetY, $offsetX-2:false, $offsetY-2:false, $offsetX-3:false, $offsetY-3:false)
+// 	@if $offsetX-3 and $offsetY-3
+// 		box-shadow: $offsetX $offsetY $color, $offsetX-2 $offsetY-2 $color, $offsetX-3 $offsetY-3 $color
+// 	@else if $offsetX-2 and $offsetY-2
+// 		box-shadow: $offsetX $offsetY $color, $offsetX-2 $offsetY-2 $color 
+// 	@else
+// 		box-shadow: $offsetX $offsetY $color
+
+// #one
+// 	+box-shadow($color1, 200px, 509px, 20px, 300px, -120px, 80px)
+
+// #two
+// 	+box-shadow($color2, 250px, 450px, -100px, 200px)
+
+// #three
+// 	+box-shadow($color3, 70px, 500px, -100px, 200px)
