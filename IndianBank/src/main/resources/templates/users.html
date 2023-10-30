@@ -21,7 +21,8 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a th:href="@{index}">Home</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Active
-					Users</li>
+					Users (<span th:text="${user.fname + ' ' + user.lname}"></span>)
+				</li>
 			</ol>
 		</nav>
 		<div class="row">

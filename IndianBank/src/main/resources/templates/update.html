@@ -22,13 +22,12 @@
 <body>
 
 	<div class="container">
-
-
 		<nav aria-label="breadcrumb" class="main-breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a th:href="@{index}">Home</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Profile
-					Settings (<span th:text="${user.fname}"></span>)
+					Settings (<span th:text="${user.fname + ' ' + user.lname}"></span>
+					)
 				</li>
 			</ol>
 		</nav>
@@ -406,14 +405,17 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-			<script
-				src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-			<script
-				src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-			<script type="text/javascript" th:src="@{/js/app.js}"></script>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 </body>
 
 </html>

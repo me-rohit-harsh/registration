@@ -34,10 +34,13 @@ public class UserController {
 	public String allUsers(@RequestParam(name = "searchKey", defaultValue = "") String searchKey,
 			@RequestParam(name = "genderFilter", defaultValue = " ") Character genderFilter, Model model,
 			HttpSession session) {
+
 		System.out.println("@GetMapping(\"/users\")");
 		Boolean auth = (Boolean) session.getAttribute("true");
+		User user = (User) session.getAttribute("user");
+		model.addAttribute(user);
 		System.out.println(auth);
-		if (auth != null&& auth) {
+		if (auth != null && auth) {
 			if (searchKey.isEmpty() && genderFilter.equals(' ')) {
 				model.addAttribute("users", userService.allUser());
 				return "users";

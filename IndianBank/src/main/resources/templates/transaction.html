@@ -19,10 +19,12 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a th:href="@{index}">Home</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Transaction
-					List</li>
+					List (<span th:text="${user.fname + ' ' + user.lname}"></span>)
+
+				</li>
 			</ol>
 		</nav>
-		
+
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 				<h1 class="text-center">List Of All Transactions</h1>
@@ -34,14 +36,17 @@
 							aria-describedby="search-addon" name="searchKey" /> -->
 
 						<!-- Transaction Type Filter Drop down -->
-						<select class="form-select" name="transactionFilter">
-							<option value="" selected>All Transactions</option>
+						<select class="form-select" name="transactionFilter"
+							onchange="this.form.submit()">
+							<option disabled="disabled" selected="selected">Filter
+								Transactions</option>
+							<option value="">All Transactions</option>
 							<option value="Credit">Credit</option>
 							<option value="Debit">Debit</option>
 						</select>
-
 						<!--  Sort by feature will be added here-->
-						<button type="submit" class="btn btn-outline-primary">Search</button>
+						<!-- <button type="submit" class="btn btn-outline-primary">Search</button> -->
+
 					</div>
 
 
@@ -51,22 +56,23 @@
 
 
 	</div>
-<div class="container">
-			<div class="row">
-				<div class="col-md-6 offset-md-3" th:if="${session.trueMsg==true}">
-					<div class="alert alert-info" th:if="${transactions.size() > 0}">
-						Found <span th:text="${transactions.size()}"></span> result(s)
-					</div>
-					<div class="alert alert-danger" th:if="${transactions.size() ==0}">
-						No result found!!</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3" th:if="${session.trueMsg==true}">
+				<div class="alert alert-info" th:if="${transactions.size() > 0}">
+					Found <span th:text="${transactions.size()}"></span> transaction(s)
 				</div>
+				<div class="alert alert-danger" th:if="${transactions.size() ==0}">
+					No transaction found!!</div>
 			</div>
 		</div>
+	</div>
 	<div class="container" th:if="${transactions.size()>0}">
 		<div class="row">
 			<table class="table table-striped table-bordered">
 				<thead class="table-dark">
 					<tr>
+
 						<th>Reference No.</th>
 						<th>Transaction Date</th>
 						<th>Transaction Remarks</th>
@@ -84,7 +90,7 @@
 
 						<td
 							th:if="${transaction.trnsactionId == null and transaction.transactionType == 'Credit'}">Cash
-							Deposite</td>
+							Deposit</td>
 						<td
 							th:if="${transaction.trnsactionId == null and transaction.transactionType == 'Debit'}">Cash
 							Withdrawal</td>

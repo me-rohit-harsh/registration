@@ -30,10 +30,12 @@ public class TransactionController {
 		System.out.println("@GetMapping(\"/transaction\")");
 		Boolean auth = (Boolean) session.getAttribute("true");
 		User user = (User) session.getAttribute("user");
+
 		System.out.println(transactionType);
 		if (auth != null && auth && user != null) {
 			System.out.println("here");
 			List<Transactions> transactions;
+			model.addAttribute(user);
 			if (transactionType.equals("")) {
 				transactions = transactionRepository.findByUserId(user.getId());
 				System.out.println("in default section");
